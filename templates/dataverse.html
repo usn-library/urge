@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URGE - ReadMe File Generator</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Vendor assets (local, no CDN) -->
+    <script src="{{ url_for('static', filename='vendor/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/js/bootstrap.bundle.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/open-sans.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.URGE_DATAVERSE_ALLOWED_HOSTS = {{ (dataverse_allowed_hosts or ['dataverse.no', 'demo.dataverse.no']) | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='vendor/js/qrcode.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='dvurge.js') }}" defer></script>
+</head>
+<body>
+
+
+<div id="list-example" class="list-group">
+    <div class="shadow p-3 mb-5 bg-white rounded"><br>
+        <div class="text-center mb-2">
+            <img src="{{ url_for('static', filename='favicon.ico') }}" alt="URGE" class="sidebar-favicon">
+        </div>
+        <h6 class="text-center mb-0"><a href="{{ url_for('updates') }}" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none">URGE v1.5</a></h6><br>
+        <div class="accordion accordion-flush urge-sidebar-accordion" id="urgeSidebarAccordion">
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2 urge-sidebar-direct-link" type="button" data-urge-direct-scroll-target="list-item-1">
+                        <i class="fas fa-file-import me-2"></i> Import Data
+                    </button>
+                </h2>
+            </div>
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#urgeSidebarNav2" aria-expanded="false" aria-controls="urgeSidebarNav2">
+                        <i class="fas fa-info-circle me-2"></i> General Information
+                    </button>
+                </h2>
+                <div id="urgeSidebarNav2" class="accordion-collapse collapse" data-bs-parent="#urgeSidebarAccordion" data-urge-scroll-target="list-item-2">
+                    <div class="accordion-body p-2 pt-0">
+                        <ul class="urge-sidebar-textarea-tree list-unstyled mb-0" data-urge-section="2"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#urgeSidebarNav3" aria-expanded="false" aria-controls="urgeSidebarNav3">
+                        <i class="fas fa-cogs me-2"></i> Methodology
+                    </button>
+                </h2>
+                <div id="urgeSidebarNav3" class="accordion-collapse collapse" data-bs-parent="#urgeSidebarAccordion" data-urge-scroll-target="list-item-3">
+                    <div class="accordion-body p-2 pt-0">
+                        <ul class="urge-sidebar-textarea-tree list-unstyled mb-0" data-urge-section="3"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#urgeSidebarNav4" aria-expanded="false" aria-controls="urgeSidebarNav4">
+                        <i class="fas fa-file-alt me-2"></i> File Information
+                    </button>
+                </h2>
+                <div id="urgeSidebarNav4" class="accordion-collapse collapse" data-bs-parent="#urgeSidebarAccordion" data-urge-scroll-target="list-item-4">
+                    <div class="accordion-body p-2 pt-0">
+                        <ul class="urge-sidebar-textarea-tree list-unstyled mb-0" data-urge-section="4"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#urgeSidebarNav5" aria-expanded="false" aria-controls="urgeSidebarNav5">
+                        <i class="fas fa-database me-2"></i> Data-specific Information
+                    </button>
+                </h2>
+                <div id="urgeSidebarNav5" class="accordion-collapse collapse" data-bs-parent="#urgeSidebarAccordion" data-urge-scroll-target="list-item-5">
+                    <div class="accordion-body p-2 pt-0">
+                        <ul class="urge-sidebar-textarea-tree list-unstyled mb-0" data-urge-section="5"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item border-0">
+                <h2 class="accordion-header mb-0">
+                    <button class="accordion-button collapsed py-2 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#urgeSidebarNav6" aria-expanded="false" aria-controls="urgeSidebarNav6">
+                        <i class="fas fa-share-alt me-2"></i> Sharing
+                    </button>
+                </h2>
+                <div id="urgeSidebarNav6" class="accordion-collapse collapse" data-bs-parent="#urgeSidebarAccordion" data-urge-scroll-target="list-item-6">
+                    <div class="accordion-body p-2 pt-0">
+                        <ul class="urge-sidebar-textarea-tree list-unstyled mb-0" data-urge-section="6"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="http://usn.no" target="_blank">
+            <img src="static/logobib.png"
+                 alt="USN Logo" style="max-width: 150px; height: auto; margin-top: 10px; margin-bottom:10px;"></a>
+                 <h6>
+                    <a href="https://www.gnu.org/licenses/agpl-3.0.html" style="color: black; text-decoration: none;" target="_blank" rel="noopener noreferrer" title="GNU Affero General Public License v3.0"> 
+                        © 2024 USN
+                    </a>
+                </h6>
+        </div>
+    </div>
+    <div class="sidebar-footer-spacer"></div>
+    <p class="sidebar-footer-note">URGE is a service provided by<br>the USN University Library. <br><a href="mailto:forskningsdata@usn.no">forskningsdata@usn.no</a></p>
+    <p>
+    <p class="sidebar-footer-links">
+        <a href="{{ url_for('updates') }}" target="_blank" rel="noopener noreferrer">Version notes</a>
+        <span class="sidebar-footer-sep"> · </span>
+        <a href="{{ url_for('updates') }}#statistics" target="_blank" rel="noopener noreferrer">Statistics</a>
+        <span class="sidebar-footer-sep d-none"> · </span>
+        <a href="{{ url_for('privacy_policy') }}" class="d-none" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+    </p><p></p>
+</div>
+
+
+<!-- Dataset Selection Modal -->
+<div class="modal fade" id="datasetModal" tabindex="-1" aria-labelledby="datasetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="datasetModalLabel">Select Dataset</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" id="fileLocationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">File Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a href="#" id="fileLink"></a>
+                <button id="copyButton" class="btn btn-secondary">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Anonymous ReadMe warning modal -->
+<div class="modal fade" id="anonymousReadmeModal" tabindex="-1" aria-labelledby="anonymousReadmeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="anonymousReadmeModalLabel">Notice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This tool does <strong>not</strong> guarantee that the generated file will be fully anonymous. Other sections of the README (e.g. description, contributors, methodology, file list) may still contain information that could identify you or your project.</p>
+                <p>Please review the generated file before use and remove or anonymise any remaining identifying content if required.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="anonymousReadmeConfirmBtn" onclick="confirmAnonymousReadMe()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grammar check consent modal -->
+<div class="modal fade" id="grammarCheckConsentModal" tabindex="-1" aria-labelledby="grammarCheckConsentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="grammarCheckConsentModalLabel">Grammar check</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Grammar checking is performed through an external system. The text in the <strong>Description</strong> field will be sent outside this page for evaluation.</p>
+                <p class="mb-0">Do you accept this? Please do not submit text that contains identifiers or other sensitive or confidential information for grammar checking.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="grammarCheckCancelBtn" data-bs-dismiss="modal">Return to URGE</button>
+                <button type="button" class="btn btn-primary" id="grammarCheckConfirmBtn">Run grammar check</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QR Code modal -->
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="qrModalLabel">QR Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <img id="qrModalImage" alt="QR Code" style="width: 512px; height: 512px; image-rendering: pixelated;">
+                </div>
+                <div id="qrModalError" class="alert alert-danger mt-3 d-none" role="alert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="qrModalDownloadBtn">
+                    <i class="bi bi-download me-1"></i>Download
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Compare modal -->
+<div class="modal fade" id="dataCompareModal" tabindex="-1" aria-labelledby="dataCompareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content data-compare-modal-content">
+            <div class="modal-header data-compare-modal-header">
+                <h5 class="modal-title d-flex align-items-center gap-2" id="dataCompareModalLabel">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Data Compare</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body data-compare-modal-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <small class="text-muted">Common fields extracted from DMP and Dataverse metadata.</small>
+                </div>
+                <div class="table-responsive data-compare-table-wrap">
+                    <table class="table table-sm align-middle mb-0 data-compare-table">
+                        <thead class="data-compare-thead">
+                            <tr>
+                                <th scope="col" style="width: 20%;">Field</th>
+                                <th scope="col" style="width: 40%;">DMP Value</th>
+                                <th scope="col" style="width: 40%;">Dataverse Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataCompareTableBody">
+                            <tr>
+                                <td colspan="3" class="text-muted">No comparable data yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- README Preview modal -->
+<div class="modal fade" id="readmePreviewModal" tabindex="-1" aria-labelledby="readmePreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="readmePreviewModalLabel">README Preview (TXT)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <pre id="readmePreviewContent" class="readme-preview-content" aria-live="polite"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Figshare draft selection modal -->
+<div class="modal fade" id="figshareDraftsModal" tabindex="-1" aria-labelledby="figshareDraftsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="figshareDraftsModalLabel">Select a Figshare draft</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="figshareDraftsModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Zenodo draft selection modal -->
+<div class="modal fade" id="zenodoDraftsModal" tabindex="-1" aria-labelledby="zenodoDraftsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="zenodoDraftsModalLabel">Select a Zenodo draft</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="zenodoDraftsModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Right side hidden preview tab -->
+<button
+    type="button"
+    class="btn btn-primary readme-preview-tab"
+    id="readmePreviewTabButton"
+    onclick="openReadMePreview()"
+    title="Preview README text"
+    aria-label="Open README preview">
+    <i class="bi bi-eye-fill me-1"></i>Preview
+</button>
+
+
+<div class="fixed-table app-banner">
+    <div class="app-banner-inner">
+        <img src="{{ url_for('static', filename='USN-symbol_hvit.png') }}" alt="USN" class="app-banner-logo">
+        <h1 class="banner-title">URGE – README FILE GENERATOR <span class="banner-accent"></span></h1>
+    </div>
+</div>
+
+
+<div class="content" id="mainContent">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+            <form id="readmeForm" class="mt-4 needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-12">
+                        <div data-bs-spy="scroll" data-bs-target="#urgeScrollSpyNav" data-bs-smooth-scroll="true"
+                             class="scrollspy-example" tabindex="0">
+                            <nav id="urgeScrollSpyNav" class="visually-hidden" aria-hidden="true">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-1">Import</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-2">General</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-3">Methodology</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-4">File</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-5">Data</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#list-item-6">Sharing</a></li>
+                                </ul>
+                            </nav>
+
+                            <div class="accordion mb-3" id="aboutAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="aboutHeader">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutContent" aria-expanded="false" aria-controls="aboutContent">
+                                            <i class="bi bi-info-circle-fill" style="margin-right: 5px;"></i> About URGE
+                                        </button>
+                                    </h2>
+                                    <div id="aboutContent" class="accordion-collapse collapse" aria-labelledby="aboutHeader" data-bs-parent="#aboutAccordion">
+                                        <div class="accordion-body">
+                                            <p>URGE (USN Readme File Generator) is a comprehensive tool designed to create detailed and standardized README files for datasets in accordance with the FAIR principles (Findable, Accessible, Interoperable, and Reusable).</p>
+
+                                            <p><strong>Key features:</strong></p>
+                                            <ul>
+                                                <li><strong>Multiple import options:</strong> Import from DMP (SIKT DMP, DSW ELIXIR - NO), existing README files, or Dataverse</li>
+                                                <li><strong>Smart metadata handling:</strong> Automatically fetch and populate metadata from Dataverse</li>
+                                                <li><strong>Grammar checking:</strong> Built-in grammar checker to ensure high-quality documentation</li>
+                                                <li><strong>Flexible export:</strong> Generate both standard and anonymous README files</li>
+                                                <li><strong>JSON support:</strong> Export metadata in JSON format for machine readability</li>
+                                                <li><strong>Interactive interface:</strong> User-friendly form with tooltips and helpful guidance</li>
+                                            </ul>
+
+                                            <p><strong>Benefits:</strong></p>
+                                            <ul>
+                                                <li>Ensures consistency in dataset documentation</li>
+                                                <li>Facilitates data sharing and reuse</li>
+                                                <li>Supports compliance with data management standards</li>
+                                                <li>Enhances dataset discoverability and citation</li>
+                                            </ul>
+
+                                            <p>URGE is an essential tool for researchers, data managers, and institutions committed to maintaining high standards of data documentation and sharing in the scientific community.</p>
+                                            <p>URGE does not store any data entered in this form in a database; it is used only for the duration of your request.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 id="list-item-1" class="text-danger"><i class="fas fa-file-import"></i> Data Import</h3>
+                            <div class="accordion" id="importAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingdataverse">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapsedataverse" data-bs-parent="#importAccordion">
+                                            Repository Connection
+                                        </button>
+                                    </h2>
+                                    <div id="collapsedataverse" class="accordion-collapse collapse"
+                                         aria-labelledby="headingdataverse"
+                                         data-bs-parent="#importAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="nav nav-tabs mb-3" id="repoConnectionTabs" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="repo-tab-dataverse" data-bs-toggle="tab" data-bs-target="#repo-pane-dataverse" type="button" role="tab" aria-controls="repo-pane-dataverse" aria-selected="true">Dataverse</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="repo-tab-figshare" data-bs-toggle="tab" data-bs-target="#repo-pane-figshare" type="button" role="tab" aria-controls="repo-pane-figshare" aria-selected="false">Figshare</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="repo-tab-zenodo" data-bs-toggle="tab" data-bs-target="#repo-pane-zenodo" type="button" role="tab" aria-controls="repo-pane-zenodo" aria-selected="false">Zenodo</button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="repoConnectionTabContent">
+                                            <div class="tab-pane fade show active" id="repo-pane-dataverse" role="tabpanel" aria-labelledby="repo-tab-dataverse" tabindex="0">
+                                            <!-- API (Token and DOI) - shown first by default -->
+                                            <div id="apiFields" class="mb-3">
+                                                <label for="apiTokenInput" class="form-label d-inline">Import via API (Token and DOI)</label>
+                                                <span class="info-trigger position-relative d-inline-block ms-2" aria-label="API info">
+                                                    <i class="bi bi-info-circle text-primary info-trigger-icon"></i>
+                                                    <span class="info-trigger-label">API info</span>
+                                                    <span class="info-popover">
+                                                        <img src="{{ url_for('static', filename='api.gif') }}" alt="API import how-to" class="rounded shadow">
+                                                    </span>
+                                                </span>
+                                                <span class="info-trigger position-relative d-inline-block ms-2" aria-label="DOI info">
+                                                    <i class="bi bi-info-circle text-primary info-trigger-icon"></i>
+                                                    <span class="info-trigger-label">DOI info</span>
+                                                    <span class="info-popover">
+                                                        <img src="{{ url_for('static', filename='doi.png') }}" alt="DOI how-to" class="rounded shadow">
+                                                    </span>
+                                                </span>
+                                                <input type="password" class="form-control mb-2" id="apiTokenInput" placeholder="API Token" autocomplete="off">
+                                                <input type="text" class="form-control mb-2" id="doiInput" placeholder="DOI address (e.g. https://doi.org/10.70122/FK2/QZXVCS)">
+                                                <button type="button" class="btn btn-secondary mt-2" id="fetchApiButton">
+                                                    Fetch Data from Dataverse via API
+                                                </button>
+                                            </div>
+                                            <div id="dataverseApiAlert" class="alert alert-danger border-danger py-2 px-3 mb-3" role="alert">
+                                                <strong><i class="bi bi-shield-exclamation me-2"></i>Dataverse API key safety</strong>
+                                                <p class="mb-0 mt-1 small">
+                                                    Your Dataverse API key is personal to you. URGE does not store it in any database; it is used only for the duration of your request.
+                                                    After you have finished generating your README file, we recommend revoking this key
+                                                    from the Dataverse API management page, unless you actively use the same key in other systems.
+                                                </p>
+                                            </div>
+                                            <!-- Import via Private URL - when checked, hides API section and shows this -->
+                                            <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" id="usePrivateUrlCheckbox">
+                                                    <label class="form-check-label" for="usePrivateUrlCheckbox">
+                                                        Import via Private URL
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" id="useDefaultDataverseCheckbox" checked>
+                                                    <label class="form-check-label" for="useDefaultDataverseCheckbox">
+                                                        dataverse.no
+                                                    </label>
+                                                </div>
+                                                <div id="customDataverseField" class="flex-grow-1" style="display:none; min-width: 280px;">
+                                                    <input type="text" class="form-control form-control-sm" id="customDataverseUrl" placeholder="Enter Dataverse address (e.g. https://demo.dataverse.no)">
+                                                    <div class="form-text small mt-1">
+                                                        This address must be on the administrator’s trusted list
+                                                        ({% for host in (dataverse_allowed_hosts or ['dataverse.no', 'demo.dataverse.no']) %}<code>{{ host }}</code>{% if not loop.last %}, {% endif %}{% endfor %}).
+                                                        Ask an operator to add any other instance before you use it here.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="urlField" style="display:none;">
+                                                <label for="privaturl" class="form-label">Enter your Dataverse Private URL:</label>
+                                                <input type="text" class="form-control" id="privaturl" placeholder="Paste your Private URL here" onchange="checkUrl()">
+                                                <button type="button" class="btn btn-secondary mt-2" id="fetchButton" onclick="fetchDatasetFromPreview(document.getElementById('privaturl').value)">
+                                                    Fetch Data from Dataverse
+                                                </button>
+                                            </div>
+                                            <div id="dataverseDraftsList" class="mt-3"></div>
+                                            </div>
+                                            <div class="tab-pane fade" id="repo-pane-figshare" role="tabpanel" aria-labelledby="repo-tab-figshare" tabindex="0">
+                                                <label for="figshareApiKeyInput" class="form-label d-inline">Figshare Personal Token</label>
+                                                <span class="info-trigger position-relative d-inline-block ms-2" aria-label="Figshare API info">
+                                                    <i class="bi bi-info-circle text-primary info-trigger-icon"></i>
+                                                    <span class="info-trigger-label">API info</span>
+                                                    <span class="info-popover">
+                                                        <img src="{{ url_for('static', filename='figshareapi.gif') }}" alt="Figshare API import how-to" class="rounded shadow">
+                                                    </span>
+                                                </span>
+                                                <input type="password" class="form-control mb-2" id="figshareApiKeyInput" placeholder="Figshare Personal Token" autocomplete="off">
+                                                <button type="button" class="btn btn-secondary mt-2" id="figshareConnectBtn">Connect</button>
+                                                <div id="figshareApiAlert" class="alert alert-danger border-danger py-2 px-3 mb-0 mt-3" role="alert">
+                                                    <strong><i class="bi bi-shield-exclamation me-2"></i>Figshare token safety</strong>
+                                                    <p class="mb-0 mt-1 small">
+                                                        Your Figshare personal token is yours alone and is never stored on the URGE server.
+                                                        After generating your README, revoke or regenerate the token from your Figshare account settings if you no longer need it here.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="repo-pane-zenodo" role="tabpanel" aria-labelledby="repo-tab-zenodo" tabindex="0">
+                                                <label for="zenodoApiBaseUrlInput" class="form-label">Zenodo API base URL</label>
+                                                <input type="text" class="form-control mb-2" id="zenodoApiBaseUrlInput" placeholder="https://zenodo.org" value="https://zenodo.org" autocomplete="off">
+                                                <label for="zenodoAccessTokenInput" class="form-label">Personal access token</label>
+                                                <input type="password" class="form-control mb-2" id="zenodoAccessTokenInput" placeholder="Zenodo personal access token" autocomplete="off">
+                                                <button type="button" class="btn btn-secondary mt-2" id="zenodoConnectBtn">Connect</button>
+                                                <div id="zenodoApiAlert" class="alert alert-danger border-danger py-2 px-3 mb-0 mt-3" role="alert">
+                                                    <strong><i class="bi bi-shield-exclamation me-2"></i>Zenodo token safety</strong>
+                                                    <p class="mb-0 mt-1 small">
+                                                        Your Zenodo personal access token is yours alone and is never stored on the URGE server.
+                                                        Create a token with at least <code>deposit:read</code> (and <code>deposit:write</code> if required by your account) from Zenodo account settings.
+                                                        After generating your README, revoke the token if you no longer need it here.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingDMP">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapseDMP" data-bs-parent="#importAccordion">
+                                            DMP import
+                                        </button>
+                                    </h2>
+                                    <div id="collapseDMP" class="accordion-collapse collapse"
+                                         aria-labelledby="headingDMP"
+                                         data-bs-parent="#importAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="nav nav-tabs mb-3" id="dmpImportSubTabs" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="dmp-tab-sikt" data-bs-toggle="tab" data-bs-target="#dmp-pane-sikt" type="button" role="tab" aria-controls="dmp-pane-sikt" aria-selected="true">SIKT DMP</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="dmp-tab-dsw" data-bs-toggle="tab" data-bs-target="#dmp-pane-dsw" type="button" role="tab" aria-controls="dmp-pane-dsw" aria-selected="false">DSW ELIXIR - NO</button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="dmpImportSubTabsContent">
+                                                <div class="tab-pane fade show active" id="dmp-pane-sikt" role="tabpanel" aria-labelledby="dmp-tab-sikt" tabindex="0">
+                                                    <label for="jsonInput" class="form-label">Upload your DMP file in JSON
+                                                        format:</label>
+                                                    <input type="file" class="form-control" id="jsonInput" accept=".json">
+                                                    <div class="form-check mt-2">
+                                                        <input class="form-check-input" type="checkbox" id="onlyMetadataCheck">
+                                                        <label class="form-check-label" for="onlyMetadataCheck">
+                                                            Only Methodology
+                                                        </label>
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary mt-2"
+                                                            onclick="fillFormWithJSON()">Fill
+                                                        Form with this Information
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="dmp-pane-dsw" role="tabpanel" aria-labelledby="dmp-tab-dsw" tabindex="0">
+                                                    <label for="jsonInputDsw" class="form-label">Upload your DSW Questionnaire Report JSON file:</label>
+                                                    <input type="file" class="form-control" id="jsonInputDsw" accept=".json">
+                                                    <div class="form-check mt-2">
+                                                        <input class="form-check-input" type="checkbox" id="onlyMetadataCheckDsw">
+                                                        <label class="form-check-label" for="onlyMetadataCheckDsw">
+                                                            Only Methodology
+                                                        </label>
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary mt-2"
+                                                            onclick="fillFormWithDSWJSON()">Fill
+                                                        Form with this Information
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- README Import Section -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingReadme">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapseReadme" data-bs-parent="#importAccordion">
+                                            Readme Import
+                                        </button>
+                                    </h2>
+                                    <div id="collapseReadme" class="accordion-collapse collapse"
+                                         aria-labelledby="headingReadme"
+                                         data-bs-parent="#importAccordion">
+                                        <div class="accordion-body">
+                                            <p class="text-muted small mb-3">
+                                                <strong>Note:</strong> You can select a <strong>JSON file</strong> previously exported from this tool to fill all form fields exactly as saved. Alternatively, upload a <strong>TXT readme file</strong> to extract as much information as possible into the form; parsing depends on the file structure and may not populate every field.
+                                            </p>
+                                            <div id="jsonImportSection">
+                                                <label for="jsonImportInput" class="form-label">Upload your JSON file:</label>
+                                                <input type="file" class="form-control" id="jsonImportInput" accept=".json">
+                                            </div>
+                                            <div id="txtImportSection" style="display:none;">
+                                                <label for="readmeInput" class="form-label">Upload README file (TXT):</label>
+                                                <input type="file" class="form-control" id="readmeInput" accept=".txt">
+                                            </div>
+                                            <div class="form-check mt-2">
+                                                <input class="form-check-input" type="checkbox" id="txtImportCheck">
+                                                <label class="form-check-label" for="txtImportCheck">
+                                                    Use TXT readme file instead
+                                                </label>
+                                            </div>
+                                            <button type="button" class="btn btn-secondary mt-2"
+                                                    onclick="fillFormWithReadme()">
+                                                Fill Form with this Information
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dataCompareActionWrap" class="mt-3 d-flex justify-content-end">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary btn-icon-sm data-compare-icon-btn"
+                                    id="dataCompareButton"
+                                    disabled
+                                    aria-label="Data Compare"
+                                    title="Data Compare">
+                                    <i class="bi bi-diagram-3"></i>
+                                    <span class="data-compare-hover-label">Data Compare</span>
+                                </button>
+                            </div>
+                            </p>
+
+
+                            <!-- General Information -->
+                            <form class="needs-validation" novalidate>
+                                <h3 id="list-item-2" class="text-danger"><i class="fas fa-info-circle"></i> General
+                                    Information</h3>
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">
+                                        Title of Dataset: 
+                                        <i class="fa fa-asterisk text-danger" style="font-size: 10px; vertical-align: super;"></i>
+                                    </label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                           placeholder="Title of Dataset" required>
+                                    <div class="invalid-feedback">
+                                        Please enter a title for the dataset.
+                                    </div>
+                                    <small class="form-text text-muted">Enter the title of your dataset.</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="doi" class="form-label">DOI: <i class="fa fa-asterisk"
+                                                                                style="color: red; font-size: 10px; vertical-align: super;"></i></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="doi" name="doi"
+                                               placeholder="DOI" required data-toggle="tooltip"
+                                               data-placement="right"
+                                               title="A DOI (Digital Object Identifier) is a unique alphanumeric string used to identify and provide a permanent link to digital content, such as academic articles, books, and datasets. It ensures that even if the location or URL of the content changes, the DOI will always direct to the material, enabling reliable citation and easy access.">
+                                        <button type="button" class="btn btn-outline-secondary" id="doiQrBtn" title="Create QR code for DOI link" aria-label="Create DOI QR code">
+                                            <i class="bi bi-qr-code"></i>
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a DOI for the dataset.
+                                    </div>
+                                    <small class="form-text text-muted">Enter the DOI of your dataset.</small>
+                                </div>
+
+                                <div id="contactInformation">
+                                    <!-- Contact Information -->
+                                    <h6>Contact Information</h6>
+                                    <h6 class="form-text text-muted"><i class="fas fa-thumbtack" style="color:red"></i>
+                                        The person to be contacted for questions about the dataset</h6>
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Family name, Given name: <i class="fa fa-asterisk"
+                                                                                      style="color: red; font-size: 10px; vertical-align: top; position: relative; top: 5px;"
+                                                                                      data-toggle="tooltip"
+                                                                                      data-placement="top"
+                                                                                      title="Required field"></i></label>
+
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               placeholder="Family name, Given name" required>
+
+                                        <div class="invalid-feedback">
+                                            Please enter your Family name, Given name.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="institution" class="form-label">Institution:</label>
+                                        <input type="text" class="form-control" id="institution" name="institution"
+                                               placeholder="Institution">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email: <i class="fa fa-asterisk"
+                                                                                        style="color: red; font-size: 10px; vertical-align: top; position: relative; top: 5px;"
+                                                                                        data-toggle="tooltip"
+                                                                                        data-placement="top"
+                                                                                        title="Required field"></i></label>
+
+                                        <div class="position-relative">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                       placeholder="Email" required>
+                                                <button type="button" class="btn btn-outline-secondary" id="contactQrBtn" title="Create contact QR code" aria-label="Create contact QR code">
+                                                    <i class="bi bi-person-vcard"></i>
+                                                </button>
+                                            </div>
+                                            <span class="status-icon position-absolute top-50 end-0 translate-middle-y"></span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please enter your email.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="orcid" class="form-label">ORCID:</label>
+                                        <div style="display: flex; align-items: center;">
+                                            <input type="text" class="form-control" id="orcid" name="orcid"
+                                                   placeholder="ORCID"
+                                                   style="flex-grow: 1; margin-right: 10px; width: 150px;"
+                                                   data-toggle="tooltip" data-placement="right"
+                                                   title="We recommend adding your ORCID in the Identifier field (e.g. 0000-0001-1234-5678). Using an ORCID ensures that your research results are unambiguously linked to you as a researcher. You can learn more at http://orcid.org/ or get your own ORCID. If you already have an ORCID and do not remember it, you can use the -Search ORCID- button to search by name"
+                                                   oninput="formatORCID(this);">
+                                            <button type="button" class="btn btn-secondary" onclick="searchORCID()">
+                                                Search ORCID
+                                            </button>
+                                        </div>
+                                        <div id="orcidSuggestions" class="dropdown-menu" style="max-height: 240px; overflow-y: auto;"></div>
+                                    </div>
+
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="fas fa-solid fa-bell me-2"></i><em>Before the Readme.txt file is created, the following information must be registered in the metadata schema of DataverseNO. In the text below, mark the applicable fields/lines. If you have activated the Dataverse Import section above, this data will be automatically retrieved from DataverseNO.</em>
+                                    </div>
+                                    <div class="dataverse-check-row mb-1">
+                                        <div class="d-flex align-items-center">
+                                            <input type="checkbox" class="form-check-input me-2" id="contributorsCheck">
+                                            <label class="form-label me-2 mb-0">Contributors:</label>
+                                            <span class="text-muted" id="contributorsLabel" style="flex-grow: 1; font-size: 12px;">Check to retrieve from Dataverse</span>
+                                        </div>
+                                    </div>
+                                    <div class="dataverse-check-row mb-1">
+                                        <div class="d-flex align-items-center">
+                                            <input type="checkbox" class="form-check-input me-2" id="dataTypeCheck">
+                                            <label class="form-label me-2 mb-0">Data Type:</label>
+                                            <span class="text-muted" id="dataTypeLabel" style="flex-grow: 1; font-size: 12px;">Check to retrieve from Dataverse</span>
+                                        </div>
+                                    </div>
+                                    <div class="dataverse-check-row mb-1">
+                                        <div class="d-flex align-items-center">
+                                            <input type="checkbox" class="form-check-input me-2" id="dateCollectionCheck">
+                                            <label class="form-label me-2 mb-0">Date of data collection/generation:</label>
+                                            <span class="text-muted" id="dateCollectionLabel" style="flex-grow: 1; font-size: 12px;">Check to retrieve from Dataverse</span>
+                                        </div>
+                                    </div>
+                                    <div class="dataverse-check-row mb-1">
+                                        <div class="d-flex align-items-center">
+                                            <input type="checkbox" class="form-check-input me-2" id="geoLocationCheck">
+                                            <label class="form-label me-2 mb-0">Geographic location:</label>
+                                            <span class="text-muted" id="geoLocationLabel" style="flex-grow: 1; font-size: 12px;">Check to retrieve from Dataverse</span>
+                                        </div>
+                                    </div>
+                                    <div class="dataverse-check-row mb-1">
+                                        <div class="d-flex align-items-center">
+                                            <input type="checkbox" class="form-check-input me-2" id="fundingCheck">
+                                            <label class="form-label me-2 mb-0">Funding sources:</label>
+                                            <span class="text-muted" id="fundingLabel" style="flex-grow: 1; font-size: 12px;">Check to retrieve from Dataverse</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                            <p>
+                            <h6>Description of Dataset <i class="fa fa-asterisk"
+                                                          style="color: red; font-size: 10px; vertical-align: top; position: relative; top: 5px;"
+                                                          data-toggle="tooltip"
+                                                          data-placement="top"
+                                                          title="Required field"></i></h6>
+                            <small class="form-text text-muted">
+                                (Short) description of what the dataset is about, including reference to related project(s) and publication(s), if applicable. Should correspond to the information entered in the metadata fields Description and Related Publication.
+
+                            </small>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="description" rows="5" required></textarea>
+                                <button type="button" class="btn btn-secondary" id="grammarCheckBtn" style="font-size: 9px; margin-top: 5px;">Grammar Checker</button>
+                                <div id="grammarCheckResult" class="alert alert-info mt-2" style="display: none;">
+                                    <div class="grammar-suggestions"></div>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please write a description that identifies the Database
+                                </div>
+                            </div>
+                            </p>
+                            <p>
+                            <h3 id="list-item-3" class="text-danger"><i class="fas fa-cogs"></i> Methodology</h3>
+                            <div class="alert alert-warning" role="alert">
+                                <em><span style="font-weight:bold"><i class="fas fa-solid fa-bell me-2"></i>Note! If the documentation referred to is not openly available through a persistent URL, it must be added here or uploaded as file(s) to the dataset.
+                                    <br><br></span><i class="fas fa-solid fa-bell me-2"></i>
+                                    Note! It may generally be considered appropriate to have overlap in the methods section of a research data README file with citation of the original article. See Committee on Publication Ethics (COPE) guidance on text recycling:
+                                    <a href="https://publicationethics.org/guidance/endorsed-guidance/text-recycling-guidelines-editors"
+                                       target="_blank"> text recycling:</a>
+                                </em>
+                            </div>
+                            <h6 class="form-text"><strong>
+                                Description of Sources and Methods Used For Collection and/or Generation of Data
+                            </strong></h6>
+                            <div class="mb-3 d-flex align-items-start">
+                                <textarea class="form-control" id="methodology" rows="4"
+                                          style="flex-grow: 1;"></textarea>
+                                <a tabindex="0" id="methodologyInfoButton" class="btn btn-link p-0 border-0 ml-2"
+                                   role="button">
+                                    <i class="bi bi-info-circle-fill text-primary" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+
+
+                            <h6 class="form-text"><strong>
+                                Methods For Processing The Data:
+                            </strong></h6>
+                            <div class="mb-3 d-flex align-items-start">
+                                <textarea class="form-control" id="methodology2" rows="4"></textarea>
+                                <a tabindex="0" id="methodologyInfoButton2" class="btn btn-link p-0 border-0"
+                                   role="button">
+                                    <i class="bi bi-info-circle-fill text-primary" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+
+                            <h6 class="form-text text-muted">
+                                Add valid sections to the form below<br>
+                                <ul id="insertableList">
+                                    <li><a href="#" class="insertable">Facility-, instrument- or software-specific information needed to interpret the data: </a></li>
+                                    <li><a href="#" class="insertable">Standards and calibration information:</a></li>
+                                    <li><a href="#" class="insertable">Environmental/experimental conditions: </a></li>
+                                    <li><a href="#" class="insertable">Describe any quality-assurance procedures performed on the data: </a></li>
+                                </ul>
+                            </h6>
+
+                            <div class="mb-3 d-flex align-items-start">
+                                <textarea class="form-control" id="methodology3" rows="5"></textarea>
+                                <a tabindex="0" id="methodologyInfoButton3" class="btn btn-link p-0 border-0"
+                                   role="button">
+                                    <i class="bi bi-info-circle-fill text-primary" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+                            </p>
+                            <p>
+
+                            <h3 id="list-item-4" class="text-danger"><i class="fas fa-file-alt"></i> File
+                                Information
+                            </h3>
+                            <h6 class="form-text text-muted">
+                                Add valid sections to the form below<br>
+                                <ul id="insertableListFile">
+                                    <li><a href="#" class="insertableFile">Relationship between files, if important:</a></li>
+                                    <li><a href="#" class="insertableFile" data-bs-toggle="tooltip" data-bs-placement="top" title="This question is relevant if you make changes to the original dataset on file level. It does not relate to (minor) changes in the metadata. If the answer is yes, fill out the information below and repeat for each file that was updated. If the answer is no, leave the lines below unchanged. These might be used for updates to the dataset in the future">Is this an updated version of a dataset published on DataverseNO? yes/no</a></li>
+                                </ul>
+                            </h6>
+                            <h6>File List: <i class="fa fa-asterisk"
+                                              style="color: red; font-size: 10px; vertical-align: top; position: relative; top: 5px;"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Required field"></i></h6>
+
+                            <div class="mb-3 d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                        <textarea class="form-control" id="fileinformation" rows="7"
+                                                  required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please enter information about the files/folders inside the Database
+                                    </div>
+                                </div>
+                                <a tabindex="0" id="fileListInfoButton" class="btn btn-link p-0 border-0 ms-2"
+                                   role="button">
+                                    <i class="bi bi-info-circle-fill text-primary" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="button" id="checkFilesButton" class="btn btn-primary shadow-sm">Check Files</button>
+                            </div>
+
+                            <!-- File Check Results Modal -->
+                            <div class="modal fade" id="fileCheckModal" tabindex="-1" aria-labelledby="fileCheckModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="fileCheckModalLabel">File Quality Check Results</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-striped align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Original filename</th>
+                                                            <th>Status</th>
+                                                            <th>Reason</th>
+                                                            <th>Recommended action</th>
+                                                            <th>Suggested new name</th>
+                                                            <th>Suggested new format</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="fileCheckTableBody"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </p>
+                            <p>
+                            <h3 id="list-item-5" class="text-danger"><i class="fas fa-database"></i> Data-Specific
+                                Information For:</h3>
+                            <h6 class="form-text text-muted">
+                                Repeat this section for each file, as appropriate. Recurring items may also be
+                                explained
+                                in a common
+                                initial section.
+                            </h6>
+                            <div class="mb-3 d-flex align-items-start">
+                                <textarea class="form-control" id="datascientific" rows="10"></textarea>
+                                <a tabindex="0" id="datascientificButton" class="btn btn-link p-0 border-0"
+                                   role="button">
+                                    <i class=" bi bi-info-circle-fill text-primary" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+
+                            <div id="datascientificContent" style="display: none;">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>
+                                                <strong>For TABULAR data</strong> provide a data dictionary/code
+                                                book
+                                                containing the
+                                                following information:.<br><br>
+                                                <a href="#" id="addColumnVariable"><strong>Variable/Column List: </strong></a><br><em>List variable/column name(s),
+                                                description(s), unit(s) of measurement, decimal separator (comma or
+                                                point), value labels, and source(s) as appropriate for
+                                                each.</em><br><br>
+                                                <a href="#" id="addColumnMissing"><strong>Missing data codes: </strong></a>
+                                                <br><em>Define codes or symbols used to indicate missing data.</em><br><br>
+                                                <a href="#" id="addColumnSpecialized"><strong>Specialized formats or other abbreviations used: </strong></a>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>
+                                                <strong>For QUALITATIVE data</strong> (e.g. interviews, images),
+                                                provide
+                                                a data
+                                                list: <br><br>
+                                                <a href="#" id="addColumnData"><strong>Data List: </strong></a><br><em>The
+                                                data list
+                                                should contain the following information, as appropriate: interview
+                                                identifier (ID); age; gender; occupation,
+                                                organisation; location; place of interview; date of interview;
+                                                transcript file name.
+                                                Information included should be detailed enough to enable sub-setting
+                                                and
+                                                filtering,
+                                                but not detailed enough to enable identification of participants
+                                                where
+                                                confidentiality has been promised.</em><br><br>
+                                                <a href="#" id="addColumnContextual"><strong>Contextual Information: </strong></a>
+                                                <br><em>Where applicable, provide biographical or other contextual
+                                                information
+                                                relating to the interview or interviewee, either embedded at the
+                                                beginning of the
+                                                transcript files, as a summary page, or added below, as
+                                                appropriate.</em><br><br>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </p>
+                            <h3 id="list-item-6" class="text-danger"><i class="fas fa-share-alt"></i> Sharing</h3>
+                            <p>
+                                <small class="form-text text-muted"><h6>
+                                    Whenever applicable, the following information should be registered in the metadata schema of DataverseNO. In the text below, mark the fields that apply. If you have activated the Dataverse Import section above, this information will be automatically retrieved from DataverseNO</h6>
+                                    <ul id="insertableListShare">
+                                        <li class="sharing-item-with-buttons d-flex align-items-center flex-wrap gap-1">
+                                            <span>Licenses/Restrictions: See Terms tab.</span>
+                                            <span class="sharing-item-buttons ms-1">
+                                                <button type="button" class="btn btn-icon-sm btn-outline-secondary" title="Add Text" onclick="addSharingText('Licenses/Restrictions: See Terms tab.')"><i class="bi bi-card-text"></i></button>
+                                                <button type="button" class="btn btn-icon-sm btn-outline-primary" title="Find and Get Data" onclick="fetchSharingDataFromDataverse('license')"><i class="bi bi-cloud-download"></i></button>
+                                            </span>
+                                        </li>
+                                        <li class="sharing-item-with-buttons d-flex align-items-center flex-wrap gap-1">
+                                            <span>Links to publications that cite or use the data: See metadata field Related Publication.</span>
+                                            <span class="sharing-item-buttons ms-1">
+                                                <button type="button" class="btn btn-icon-sm btn-outline-secondary" title="Add Text" onclick="addSharingText('Links to publications that cite or use the data: See metadata field Related Publication.')"><i class="bi bi-card-text"></i></button>
+                                                <button type="button" class="btn btn-icon-sm btn-outline-primary" title="Find and Get Data" onclick="fetchSharingDataFromDataverse('relatedPublication')"><i class="bi bi-cloud-download"></i></button>
+                                            </span>
+                                        </li>
+                                        <li class="sharing-item-with-buttons d-flex align-items-center flex-wrap gap-1">
+                                            <span>Links/relationships to related data sets: See metadata field Related Datasets.</span>
+                                            <span class="sharing-item-buttons ms-1">
+                                                <button type="button" class="btn btn-icon-sm btn-outline-secondary" title="Add Text" onclick="addSharingText('Links/relationships to related data sets: See metadata field Related Datasets.')"><i class="bi bi-card-text"></i></button>
+                                                <button type="button" class="btn btn-icon-sm btn-outline-primary" title="Find and Get Data" onclick="fetchSharingDataFromDataverse('relatedDataset')"><i class="bi bi-cloud-download"></i></button>
+                                            </span>
+                                        </li>
+                                        <li class="sharing-item-with-buttons d-flex align-items-center flex-wrap gap-1">
+                                            <span>Data sources: See metadata field Data Sources.</span>
+                                            <span class="sharing-item-buttons ms-1">
+                                                <button type="button" class="btn btn-icon-sm btn-outline-secondary" title="Add Text" onclick="addSharingText('Data sources: See metadata field Data Sources.')"><i class="bi bi-card-text"></i></button>
+                                                <button type="button" class="btn btn-icon-sm btn-outline-primary" title="Find and Get Data" onclick="fetchSharingDataFromDataverse('dataSources')"><i class="bi bi-cloud-download"></i></button>
+                                            </span>
+                                        </li>
+                                        <li class="sharing-item-citation d-flex align-items-center flex-wrap gap-1">
+                                            <a href="#" id="citationLink" class="sharing-citation-link">Recommended citation: See citation generated by repository</a>
+                                            <div id="citationOptions" style="display: none;" class="mt-2 w-100">
+                                                <span class="citation-label" onclick="addCitation('EndNote XML')">EndNote XML</span>
+                                                <span class="citation-label" onclick="addCitation('RIS')">RIS</span>
+                                                <span class="citation-label" onclick="addCitation('BibTeX')">BibTeX</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </small>
+
+                            <div class="mb-3 d-flex align-items-start">
+                                <textarea class="form-control" id="sharing" rows="6"></textarea>
+                                <a tabindex="0" id="infoButton" class="btn btn-link p-0 border-0"
+                                   role="button">
+                                    <i class=" bi bi-info-circle-fill text-primary"
+                                       style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="readme-action-buttons mt-4">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-readme" onclick="generateReadMe()"><i class="bi bi-file-earmark-text me-2"></i>Generate ReadMe File</button>
+                        <button type="button" class="btn btn-readme" onclick="generateAnonymousReadMe()"><i class="bi bi-person-vcard me-2"></i>Anonymous ReadMe File</button>
+                        <button type="button" class="btn btn-readme" onclick="generateJsonFile()"><i class="bi bi-filetype-json me-2"></i>JSON File</button>
+                        <button type="button" class="btn btn-readme conn-status--off" id="sendDataverseBtn" onclick="sendReadmeDataverse()" title="Dataverse connection status">
+                            <i class="bi bi-cloud-upload me-2"></i>
+                            <span class="send-dataverse-labels">
+                                <span class="send-dataverse-title">Send to Dataverse</span>
+                                <span class="dataverse-conn-status">
+                                    <span class="conn-light" id="dataverseConnLight" aria-hidden="true"></span>
+                                    <span class="conn-text" id="dataverseConnText">Not connected</span>
+                                </span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-readme conn-status--off d-none" id="sendFigshareBtn" onclick="sendReadmeFigshare()" title="Figshare connection status">
+                            <i class="bi bi-cloud-upload me-2"></i>
+                            <span class="send-dataverse-labels">
+                                <span class="send-dataverse-title">Send to Figshare</span>
+                                <span class="dataverse-conn-status">
+                                    <span class="conn-light" id="figshareConnLight" aria-hidden="true"></span>
+                                    <span class="conn-text" id="figshareConnText">Not connected</span>
+                                </span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <br><br>
+                <div><small><p class="extra-small-text">The ReadMe File Generator is based on USN ReadMe File
+                    template which is adapted from the following documents/resources:<br/>
+                    Conzett, Philipp. (2024). <a href="https://doi.org/10.5281/zenodo.7453999" target="_blank">DataverseNO
+                        README File Template - General (2.4)</a>. Zenodo<br/>
+                    <p class="footer-privacy-note"><i class="bi bi-shield-check me-1"></i><strong>No data entered in this form is stored on our servers.</strong></p>
+                    <strong>Contacts:</strong> <a href="http://forskningsda ta@usn.no">forskningsdata@usn.no</a></p>
+                </small></div>
+
+        </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

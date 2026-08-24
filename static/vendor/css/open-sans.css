@@ -1,0 +1,29 @@
+/* Open Sans - local font files (weights 400, 600, 700, 800) */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/open-sans/open-sans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/open-sans/open-sans-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/open-sans/open-sans-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/open-sans/open-sans-800.woff2') format('woff2');
+}

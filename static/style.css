@@ -1,0 +1,1046 @@
+/* DataverseNO-like theme tokens */
+:root {
+    --dn-primary: #0b5ed7; /* Dataverse/Bootstrap blue */
+    --dn-primary-dark: #0a58ca;
+    --dn-secondary: #6c757d;
+    --dn-bg: #f5f7fa; /* light gray background */
+    --dn-surface: #ffffff; /* card/content surface */
+    --dn-border: #e5e7eb; /* light gray border */
+    --dn-text: #212529;
+    --dn-danger: #d62828;
+    --dn-success: #198754;
+    --dn-warning: #ffc107;
+    --dn-info: #0dcaf0;
+}
+
+body {
+    background-image: url('background.png'), linear-gradient(to bottom, var(--dn-bg), #ffffff);
+    background-repeat: no-repeat, repeat;
+    background-position: right bottom, 0 0;
+    background-size: contain, auto;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-top: 0; /* header is not fixed */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+#list-example {
+    position: fixed;
+    top: 130px; /* offset the fixed sidebar */
+    width: 300px;
+    z-index: 100;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Pin the sidebar to the right of the form */
+@media (min-width: 1200px) {
+    .content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #list-example {
+        left: calc(50% + 280px); /* Center in the reserved 340px sidebar gutter */
+    }
+}
+
+/* Mid-width desktops */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    #list-example {
+        left: calc(50% + 280px);
+    }
+}
+
+#list-example .list-group-item {
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+#list-example .list-group-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(-5px);
+}
+
+#list-example .list-group-item.active {
+    background-color: var(--dn-primary);
+    border-color: var(--dn-primary);
+}
+
+/* Sidebar accordion: no per-button borders/shadows (panel .shadow on #list-example stays) */
+#list-example .urge-sidebar-accordion .accordion-item {
+    background: transparent;
+    border: none !important;
+    box-shadow: none !important;
+    margin-bottom: 0;
+    border-radius: 0 !important;
+    overflow: visible;
+}
+.urge-sidebar-accordion .accordion-button {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.45rem 0.5rem;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    margin-bottom: 4px;
+    background-color: #fff;
+    border: none !important;
+}
+.urge-sidebar-accordion .accordion-button:not(.collapsed) {
+    background-color: rgba(11, 94, 215, 0.08);
+    color: var(--dn-text);
+    box-shadow: none !important;
+    border: none !important;
+}
+.urge-sidebar-accordion .accordion-button:focus {
+    box-shadow: none !important;
+    border: none !important;
+}
+.urge-sidebar-accordion .accordion-button:focus-visible {
+    outline: 2px solid rgba(11, 94, 215, 0.45);
+    outline-offset: 2px;
+}
+.urge-sidebar-accordion .accordion-button::after {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+.urge-sidebar-accordion .accordion-button.urge-sidebar-direct-link::after {
+    display: none;
+}
+.urge-sidebar-accordion .accordion-body {
+    padding-top: 0.25rem !important;
+}
+.urge-sidebar-textarea-tree {
+    border-left: 2px solid var(--dn-border);
+    padding-left: 0.5rem;
+    margin: 0 0 0 0.15rem;
+    font-size: 0.75rem;
+}
+.urge-sidebar-tree-item + .urge-sidebar-tree-item {
+    margin-top: 0.3rem;
+}
+#list-example .urge-sidebar-textarea-tree .urge-sidebar-tree-label.btn {
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.32;
+    word-break: break-word;
+    color: #5c6368;
+}
+#list-example .urge-sidebar-textarea-tree .urge-sidebar-tree-label.btn.text-body {
+    color: #5c6368;
+}
+.urge-sidebar-tree-label.text-danger {
+    color: var(--dn-danger) !important;
+}
+
+/* Sidebar checklist: minimal status LEDs (all sections) */
+.urge-sidebar-tree-subheading {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #9098a0;
+    margin-top: 0.4rem;
+    margin-bottom: 0.18rem;
+    padding-left: 0.15rem;
+    list-style: none;
+}
+#list-example .urge-sidebar-textarea-tree .urge-sidebar-tree-empty-msg {
+    font-size: 0.6875rem;
+    font-weight: 300;
+    line-height: 1.35;
+    color: #adb5bd;
+}
+.urge-sidebar-textarea-tree > li.urge-sidebar-tree-subheading:first-child {
+    margin-top: 0;
+}
+.urge-sidebar-led {
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.urge-sidebar-led--missing {
+    background-color: var(--dn-danger);
+    box-shadow: 0 0 0 1px rgba(214, 40, 40, 0.25);
+}
+.urge-sidebar-led--ok {
+    background-color: var(--dn-success);
+    box-shadow: 0 0 0 1px rgba(25, 135, 84, 0.25);
+}
+
+/* Tighten space between © USN and the footer note */
+#list-example > .shadow.mb-5 {
+    margin-bottom: 0.4rem !important;
+}
+.sidebar-favicon {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+}
+.sidebar-footer-spacer {
+    height: 0.2rem;
+    margin: 0;
+}
+.sidebar-footer-note {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #aaa;
+    margin: 0;
+    padding-top: 0.1rem;
+    text-align: center;
+}
+.sidebar-footer-note a {
+    color: #b0b0b0;
+    text-decoration: none;
+}
+.sidebar-footer-note a:hover {
+    color: #888;
+    text-decoration: underline;
+}
+.sidebar-footer-links {
+    font-size: 0.7rem;
+    line-height: 1.4;
+    color: #999;
+    margin: 0;
+    padding-top: 0.25rem;
+    text-align: center;
+}
+.sidebar-footer-links a {
+    color: #999;
+    text-decoration: none;
+}
+.sidebar-footer-links a:hover {
+    color: #bbb;
+    text-decoration: underline;
+}
+.sidebar-footer-sep {
+    color: #777;
+}
+
+/* Footer privacy note: small bold type */
+.footer-privacy-note {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin: 0.25rem 0;
+}
+.footer-privacy-note .bi {
+    font-size: 0.85rem;
+    vertical-align: middle;
+}
+
+.content {
+    margin: 0 auto; /* center */
+    padding: 20px;
+    max-width: 1200px; /* max content width */
+    padding-right: 340px; /* reserve space for the sidebar */
+    background: var(--dn-surface);
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+    .content {
+        max-width: 1200px;
+        padding-right: 340px;
+    }
+}
+
+/* Responsive layout */
+@media (max-width: 1200px) {
+    #list-example {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: none;
+    }
+    
+    .content {
+        margin: 0 auto;
+        padding: 20px;
+        padding-right: 20px; /* normal padding when sidebar is hidden */
+        max-width: 1000px; /* narrower on small screens */
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 0;
+    }
+    
+    .content {
+        margin: 0 auto;
+        padding: 15px;
+        padding-right: 15px; /* mobile padding */
+        max-width: 95%; /* almost full width on mobile */
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+    
+    #list-example {
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+}
+
+.fixed-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    background: var(--dn-surface);
+    padding: 40px 0;
+    min-height: 120px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* URGE banner: purple background, USN logo, white text */
+.app-banner {
+    background: #5a1a7a;
+    padding: 0.75rem 1.5rem;
+    min-height: auto;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: none;
+}
+.app-banner-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.app-banner-inner .ms-auto {
+    margin-left: auto;
+}
+.app-banner-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.app-banner .banner-title {
+    margin: 0;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    line-height: 1.3;
+}
+.app-banner .banner-accent {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.centered-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Default banner text (outside .app-banner) */
+.banner-title {
+    margin: 0;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--dn-text);
+    text-transform: none;
+    line-height: 1.2;
+}
+
+.banner-accent {
+    color: var(--dn-primary);
+}
+
+/* Custom CSS for date inputs */
+#startDate, #endDate {
+    width: 150px;
+}
+
+.tooltip-inner {
+    max-width: 350px;
+    background-color: var(--dn-primary-dark);
+    color: #ffffff;
+}
+
+.tooltip-arrow {
+    border-top-color: darkblue;
+}
+
+.extra-small-text {
+    font-size: 0.8em;
+}
+
+.hidden {
+    display: none;
+}
+
+.citation-label {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 0 4px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.citation-label:hover {
+    background-color: #e9ecef;
+}
+
+/* Section headings */
+.content h3.text-danger,
+.content h4.text-danger {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.6rem;
+    color: #495057;
+}
+.content h3.text-danger:first-of-type,
+.content h4.text-danger:first-of-type {
+    margin-top: 0;
+}
+.content h3.text-danger .fas,
+.content h4.text-danger .fas {
+    font-size: 0.95rem;
+    margin-right: 0.35rem;
+    opacity: 0.9;
+}
+
+/* Compact accordion */
+.content .accordion-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    min-height: auto;
+}
+.content .accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+.content .accordion-item {
+    border-radius: 6px;
+}
+.content .accordion-item .accordion-button {
+    border-radius: 6px;
+}
+.content .accordion-body {
+    padding: 0.75rem 1rem;
+}
+
+/* Form tweaks */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.form-control:hover {
+    border-color: #007bff;
+}
+
+.btn {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    font-weight: 500;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--dn-primary);
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background: var(--dn-secondary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--dn-primary-dark);
+}
+
+.btn-secondary:hover {
+    background: #5c636a;
+}
+
+.accordion-item {
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.accordion-button {
+    border-radius: 12px;
+    background: #f8f9fa;
+    border: 1px solid var(--dn-border);
+    font-weight: 500;
+    padding: 15px 20px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--dn-primary);
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+.accordion-button::after {
+    pointer-events: none;
+}
+
+.accordion-button:disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Accordion layout */
+.accordion-button {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.accordion-collapse {
+    transition: height 0.35s ease;
+}
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.alert-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #664d03;
+}
+
+.alert-info {
+    background: #cff4fc;
+    color: #055160;
+}
+
+/* Tables and cards */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Scroll spy */
+.scrollspy-example {
+    position: relative;
+}
+
+/* Compact h3/h4 heading background */
+.scrollspy-example h3,
+.scrollspy-example h4.text-danger {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    border-bottom: none;
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.scrollspy-example h3::before,
+.scrollspy-example h4.text-danger::before {
+    content: none;
+}
+
+/* Gap between heading and accordion */
+.scrollspy-example h3 + .accordion,
+.scrollspy-example h3 + p + .accordion {
+    margin-top: 10px;
+}
+
+/* Space between accordion blocks */
+.scrollspy-example .accordion {
+    margin-bottom: 20px;
+}
+
+/* Misc polish */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Focus improvements */
+.form-control:focus,
+.btn:focus,
+.accordion-button:focus {
+    outline: none;
+}
+
+/* Better spacing */
+.mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* Sharing: icon buttons always visible, minimal gentle design */
+.sharing-item-with-buttons .sharing-item-buttons {
+    opacity: 1;
+}
+.sharing-item-with-buttons .sharing-item-buttons .btn {
+    white-space: nowrap;
+}
+/* Sharing list: minimal, easy-to-see icon buttons */
+#insertableListShare .btn-icon-sm {
+    padding: 0.35rem 0.5rem;
+    min-width: 2rem;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    background: #f8f9fa;
+    color: #495057;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+#insertableListShare .btn-icon-sm .bi {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+#insertableListShare .btn-icon-sm:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #212529;
+}
+#insertableListShare .btn-icon-sm.btn-outline-primary {
+    border-color: #cfe2ff;
+    background: #f0f4ff;
+    color: #0d6efd;
+}
+#insertableListShare .btn-icon-sm.btn-outline-primary:hover {
+    background: #cfe2ff;
+    border-color: #9ec5fe;
+    color: #0a58ca;
+}
+#insertableListShare .btn-icon-sm.btn-outline-secondary {
+    border-color: #e9ecef;
+    background: #f8f9fa;
+    color: #6c757d;
+}
+#insertableListShare .btn-icon-sm.btn-outline-secondary:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #495057;
+}
+/* Sharing list: bullet (dot) for all items like Recommended citation */
+#insertableListShare {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+#insertableListShare li {
+    margin-bottom: 0.35rem;
+}
+/* Bullet for all items: same alignment */
+#insertableListShare li.sharing-item-with-buttons::before,
+#insertableListShare li.sharing-item-citation::before {
+    content: "• ";
+    margin-right: 0.25rem;
+}
+/* Last item: same font/alignment as others; link clearly visible */
+#insertableListShare li.sharing-item-citation {
+    list-style: none;
+}
+#insertableListShare .sharing-citation-link {
+    color: #0d6efd;
+    text-decoration: underline;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+#insertableListShare .sharing-citation-link:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+}
+/* API info / DOI info: icon + label, hover shows image below (above all panels) */
+.info-trigger {
+    cursor: pointer;
+    white-space: nowrap;
+}
+.info-trigger-icon {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+.info-trigger-label {
+    font-size: 0.875rem;
+    vertical-align: middle;
+    margin-left: 0.15rem;
+}
+.info-trigger .info-popover {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 6px;
+    display: none;
+    z-index: 9999;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+.info-trigger:hover .info-popover {
+    display: block;
+}
+.info-trigger .info-popover img {
+    max-width: 320px;
+    display: block;
+    vertical-align: middle;
+}
+
+/* Small icon-only buttons: compact, minimal; text on hover via title */
+.btn-icon-sm {
+    padding: 0.3rem 0.45rem;
+    min-width: 1.85rem;
+    line-height: 1;
+    border-radius: 6px;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.btn-icon-sm .bi {
+    font-size: 0.9rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#dataCompareActionWrap {
+    position: relative;
+}
+
+.data-compare-icon-btn {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    padding: 0 0.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    border-radius: 999px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.2s ease, padding 0.2s ease, gap 0.2s ease;
+}
+
+.data-compare-icon-btn .bi {
+    font-size: 0.92rem;
+    flex: 0 0 auto;
+}
+
+.data-compare-hover-label {
+    color: #fff;
+    font-size: 0.72rem;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    max-width: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, max-width 0.2s ease;
+}
+
+.data-compare-icon-btn:hover .data-compare-hover-label,
+.data-compare-icon-btn:focus-visible .data-compare-hover-label {
+    opacity: 1;
+    max-width: 120px;
+}
+
+.data-compare-icon-btn:hover,
+.data-compare-icon-btn:focus-visible {
+    width: 7.2rem;
+    gap: 0.35rem;
+}
+
+.data-compare-icon-btn:disabled {
+    pointer-events: auto;
+    cursor: not-allowed;
+}
+
+.data-compare-modal-content {
+    border: 1px solid #dbe7ff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.data-compare-modal-header {
+    background: linear-gradient(180deg, #f4f8ff 0%, #eef4ff 100%);
+    border-bottom: 1px solid #dbe7ff;
+}
+
+.data-compare-modal-body {
+    background: #fbfdff;
+}
+
+.data-compare-table-wrap {
+    border: 1px solid #dbe7ff;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.data-compare-table {
+    margin-bottom: 0;
+}
+
+.data-compare-thead th {
+    background: #e9f1ff;
+    color: #0b3f91;
+    border-bottom: 1px solid #d0e2ff;
+    font-weight: 600;
+}
+
+.data-compare-table tbody th {
+    background: #f6f9ff;
+    color: #1f2d3d;
+    font-weight: 600;
+}
+
+.data-compare-table tbody td,
+.data-compare-table tbody th {
+    border-color: #e3ecff;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    vertical-align: top;
+}
+
+.data-compare-table tbody tr:nth-child(even) td {
+    background: #fcfdff;
+}
+
+/* ReadMe action buttons: minimal, gentle, icon + text */
+.readme-action-buttons {
+    gap: 0.75rem;
+}
+.btn-readme {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border: 1px solid #b6d4fe;
+    border-radius: 8px;
+    background: #e7f1ff;
+    color: #0d6efd;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-readme .bi {
+    font-size: 1.05rem;
+    opacity: 0.95;
+}
+.btn-readme:hover {
+    background: #cfe2ff;
+    border-color: #9ec5fe;
+    color: #0a58ca;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.12);
+}
+.btn-readme:active {
+    background: #b6d4fe;
+    border-color: #6ea8fe;
+}
+
+/* Dataverse connection status shown inside the Send to Dataverse button */
+#sendDataverseBtn .send-dataverse-labels {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+#sendDataverseBtn .send-dataverse-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+#sendDataverseBtn .dataverse-conn-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+#sendDataverseBtn .conn-light {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #dc3545;
+    box-shadow: 0 0 0 rgba(220, 53, 69, 0);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+#sendDataverseBtn .conn-text {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #dc3545;
+    transition: color 0.2s ease;
+}
+#sendDataverseBtn.conn-status--on .conn-light {
+    background: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+}
+#sendDataverseBtn.conn-status--on .conn-text {
+    color: #28a745;
+}
+
+.readme-preview-tab {
+    position: fixed;
+    right: 0;
+    top: 52%;
+    transform: translateY(-50%);
+    z-index: 1060;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 0;
+    padding: 12px 8px;
+    min-width: auto;
+    min-height: 120px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.readme-preview-tab:hover,
+.readme-preview-tab:focus {
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.readme-preview-content {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    max-height: 70vh;
+}
+
+@media (max-width: 1200px) {
+    .readme-preview-tab {
+        right: 0;
+        top: auto;
+        bottom: 18px;
+        transform: none;
+        min-height: 108px;
+    }
+
+    .readme-preview-tab:hover,
+    .readme-preview-tab:focus {
+        right: 0;
+        transform: none;
+    }
+}

@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.idea/
+instance/secret.key
+instance/*.db
+instance/*.docx
+.env
+.pytest_cache/
+.mypy_cache/
+# Local security scan reports - do not publish
+local/

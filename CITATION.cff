@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: If you use URGE, please cite it using the metadata from this file.
+type: software
+title: "URGE: USN ReadMe File Generator"
+abstract: >-
+  URGE helps researchers create standardised README files for datasets
+  in line with the FAIR principles.
+authors:
+  - family-names: Dogan
+    given-names: Ahmet
+    email: ahmet.dogan@usn.no
+    website: https://www.usn.no/
+    orcid: https://orcid.org/0009-0000-3418-4686
+    affiliation: "USN University Library"
+  - family-names: Torsøe
+    given-names: Dag-Even
+    email: dag-even.m.torsoe@usn.no
+    orcid: https://orcid.org/0000-0002-2434-7792
+    affiliation: "USN University Library"
+  - family-names: Kelil
+    given-names: Ali Abdurhman
+    email: ali.a.kelil@usn.no
+    orcid: https://orcid.org/0009-0009-6496-3387
+    affiliation: "USN University Library"
+  - family-names: Nilsen
+    given-names: Tom Erik
+    email: tom.e.nilsen@usn.no
+    orcid: https://orcid.org/0009-0001-2580-0309
+    affiliation: "USN University Library"
+  - name: "USN University Library"
+    email: forskningsdata@usn.no, researchdata@usn.no
+    website: https://www.usn.no/
+license: AGPL-3.0
+version: "1.6"
+date-released: "2026-08-20"
+keywords:
+  - research data
+  - README
+  - FAIR
+  - Dataverse
+  - Figshare
+  - Zenodo
+contact:
+  - name: "USN University Library"
+    email: forskningsdata@usn.no

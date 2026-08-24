@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URGE – Updates & Changelog</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/open-sans.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; padding: 2rem 0; }
+        .updates-container { max-width: 720px; margin: 0 auto; }
+        .updates-title { font-weight: 700; margin-bottom: 1.5rem; }
+        .updates-list { list-style: none; padding-left: 0; }
+        .updates-list li { padding: 0.35rem 0; padding-left: 1.5rem; position: relative; }
+        .updates-list li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+        .updates-sublist { margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1.25rem; }
+        .back-link { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="container updates-container">
+        <h1 class="updates-title">URGE Updates</h1>
+        <p class="text-muted mb-4">Updates and changes in this release.</p>
+
+        <div id="statistics">
+        <p class="mb-4">
+            <strong>Total page views (main page):</strong> <span class="badge bg-secondary">{{ view_count | default(0) }}</span>
+        </p>
+
+        <h2 class="updates-title h4 mt-4">Readme button triggers</h2>
+        <div class="mb-4" style="max-height: 320px;">
+            <canvas id="buttonStatsChart" aria-label="Button trigger chart"></canvas>
+        </div>
+        </div>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.6</h2>
+        <ul class="updates-list">
+            <li><strong>Dataverse connection indicator:</strong> The “Send to Dataverse” button now shows a small connection status under its label. A <strong>green</strong> light with “Connected” appears once an API token and DOI have been entered and a connection to Dataverse has been successfully established; otherwise a <strong>red</strong> light with “Not connected” is shown.</li>
+            <li><strong>Live status:</strong> The indicator turns green right after the dataset is fetched from the Dataverse API, and resets to red whenever the API token or DOI fields are edited, so it always reflects the current connection state.</li>
+        </ul>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.5</h2>
+        <ul class="updates-list">
+            <li><strong>Sidebar navigation (accordion):</strong> The right-hand section menu is now a Bootstrap accordion. Only one panel stays open at a time (<code>data-bs-parent</code>). Opening a panel scrolls the main page to the matching form section; scrolling the page still updates section context via scrollspy, using a hidden navigation target so the visible UI stays the accordion.</li>
+            <li><strong>Section checklist &amp; status LEDs:</strong> Under each menu section, a compact checklist lists the relevant inputs and textareas. A small dot shows completion: <strong>green</strong> when the field has content, <strong>red</strong> when it is empty. Clicking a row scrolls to and focuses that field.</li>
+            <li><strong>General Information checklist:</strong> Includes Title, DOI, a “Contact Information” subgroup, Surname/Name, Institution, Email, ORCID, and Description of Dataset. The Import panel shows a short note when there are no checklist fields in that section.</li>
+            <li><strong>Consistent checklist across sections:</strong> Methodology, File Information, Data-specific Information, and Sharing use the same LED-style checklist for their long-text fields.</li>
+            <li><strong>Live updates:</strong> The checklist refreshes on typing and when the form is filled programmatically (e.g. JSON/README import, Dataverse fetch, dataset selection, sharing “add text” / fetch actions, insertable snippets).</li>
+            <li><strong>Section anchors:</strong> Sidebar sections align with the corresponding headings in the main form (Import through Sharing).</li>
+            <li><strong>Sidebar styling:</strong> Accordion header buttons no longer use separate borders or drop shadows; the outer menu card keeps its existing shadow. Checklist labels use lighter, smaller typography for a minimal look.</li>
+            <li><strong>Technical:</strong> Event listeners for checklist refresh are attached to the main content container so fields inside nested markup still update the LEDs reliably.</li>
+            <li><strong>Other Details removed:</strong> The placeholder “Other Details” block and its sidebar entry were removed; Sharing is the sixth and final navigable section.</li>
+        </ul>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.4</h2>
+        <ul class="updates-list">
+            <li><strong>DOI QR:</strong> Added a QR icon button next to the DOI field to generate a 1024×1024 PNG QR code that links directly to the dataset DOI (doi.org).</li>
+            <li><strong>Contact QR:</strong> Added a QR icon button next to the Email field to generate a 1024×1024 PNG vCard contact QR code (Name, Institution, Email) that can be saved as a contact when scanned.</li>
+            <li><strong>In-memory PNG output:</strong> QR codes are rendered as PNG in memory and returned as a blob response (no files are stored on the server).</li>
+        </ul>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.3</h2>
+        <ul class="updates-list">
+            <li>A function was added to track the trigger counts of buttons created in the Readme.</li>
+            <li>The data source is now configurable so that data can be fetched from sources other than DataverseNo. DataverseNo remains the default; if users want to work with a different Dataverse, they can remove the default dataverse.no option in the Dataverse Metadata Import section and add their own Dataverse URL.</li>
+            <li>Security infrastructure was updated and additional safeguards were added.</li>
+            <li>After the user finishes (downloads README or JSON file), the API cache (session metadata) on the server is cleared automatically to free memory and avoid retaining sensitive data.</li>
+            <li>A new security notice was added under the Dataverse Connection accordion, reminding users that their Dataverse API key is never stored on the URGE server and recommending that they revoke the key in Dataverse after generating the README, unless it is actively used in other systems.</li>
+            <li><strong>ORCID search:</strong> In the Contact Information section, the “Search ORCID” button now looks up ORCID records by name (given name and family name) without opening the ORCID website. After you enter a name in the Name field and click “Search ORCID”, matching results appear in a dropdown below the ORCID field. Each line shows “ORCID ID – Family name, Given name” (and institution when available). Selecting an entry fills the ORCID field with that identifier.</li>
+        </ul>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.2</h2>
+        <ul class="updates-list">
+            <li>JSON option added to the Readme import section; reports imported via URGE with JSON can now be fully retrieved.</li>
+            <li>Option to import information from txt files added to the Readme import section. The number of parameters that can be read from txt file data has been increased.</li>
+            <li>Grammar check information and consent form added.</li>
+        </ul>
+
+        <h2 class="updates-title h4 mt-4">URGE V1.1</h2>
+        <ul class="updates-list">
+            <li>Dataverse metadata import errors fixed.</li>
+            <li>API access for ORCID record enabled.</li>
+            <li>The following fields can now be added without using the API:
+                <ul class="updates-sublist">
+                    <li>Contributors</li>
+                    <li>Data Type</li>
+                    <li>Date of data collection/generation</li>
+                    <li>Geographic location</li>
+                    <li>Funding sources</li>
+                </ul>
+            </li>
+            <li>File Information file checking rules revised.</li>
+            <li>Sharing section: optional fields can be added as plain text or fetched from Dataverse via API.</li>
+            <li>Warning added for Anonymous Readme (disclaimer that full anonymity is not guaranteed).</li>
+            <li>Template updated to USN standard colours.</li>
+            <li>Readme.txt revised.</li>
+        </ul>
+
+        <p class="back-link">
+            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Back to URGE</a>
+            <a href="{{ url_for('privacy_policy') }}" class="btn btn-outline-primary ms-2">Privacy Policy</a>
+        </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='vendor/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+(function () {
+    var raw = {{ (button_stats or []) | tojson }};
+    if (!raw.length) {
+        document.getElementById('buttonStatsChart').parentElement.innerHTML = '<p class="text-muted small">No data yet.</p>';
+        return;
+    }
+    var dates = [];
+    var byDate = {};
+    raw.forEach(function (r) {
+        if (byDate[r.date] === undefined) {
+            dates.push(r.date);
+            byDate[r.date] = {};
+        }
+        byDate[r.date][r.button_id] = r.count;
+    });
+    dates.sort();
+
+    var buttonMeta = {
+        generate_readme:     { label: 'Generate ReadMe File', color: 'rgb(13, 110, 253)' },
+        anonymous_readme:    { label: 'Anonymous ReadMe File', color: 'rgb(25, 135, 84)' },
+        json_file:           { label: 'JSON File', color: 'rgb(253, 126, 20)' },
+        send_to_dataverse:   { label: 'Send to Dataverse', color: 'rgb(111, 66, 193)' },
+        send_to_figshare:    { label: 'Send to Figshare', color: 'rgb(214, 51, 132)' }
+    };
+    var datasets = [];
+    Object.keys(buttonMeta).forEach(function (id) {
+        datasets.push({
+            label: buttonMeta[id].label,
+            data: dates.map(function (d) { return byDate[d][id] || 0; }),
+            borderColor: buttonMeta[id].color,
+            backgroundColor: buttonMeta[id].color.replace(')', ', 0.1)').replace('rgb', 'rgba'),
+            fill: false,
+            tension: 0.2
+        });
+    });
+
+    new Chart(document.getElementById('buttonStatsChart'), {
+        type: 'line',
+        data: { labels: dates, datasets: datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { position: 'top' }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Date' } },
+                y: { beginAtZero: true, title: { display: true, text: 'Trigger count' }, ticks: { stepSize: 1 } }
+            }
+        }
+    });
+})();
+    </script>
+</body>
+</html>

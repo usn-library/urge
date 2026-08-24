@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URGE - Privacy Policy</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/open-sans.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container py-4" style="max-width: 900px;">
+        <h1 class="mb-3">Privacy Policy</h1>
+        <p class="text-muted">
+            This page explains how URGE processes personal data and how we apply GDPR principles such as data minimization, purpose limitation,
+            and storage limitation.
+        </p>
+
+        <h2 class="h5 mt-4">Data controller</h2>
+        <p>
+            URGE is provided by the USN University Library. For all privacy-related questions, requests, or complaints, contact:
+            <a href="mailto:forskningsdata@usn.no">forskningsdata@usn.no</a>.
+        </p>
+
+        <h2 class="h5 mt-4">What we process</h2>
+        <ul>
+            <li>Form fields that you enter to generate README/JSON outputs (for example name, institution, email, ORCID, DOI-related metadata).</li>
+            <li>Technical request metadata required to run the service securely (for example endpoint, method, and minimized diagnostic events).</li>
+            <li>Aggregated and non-identifying service statistics such as page views and button trigger counts.</li>
+        </ul>
+
+        <h2 class="h5 mt-4">Why we process personal data</h2>
+        <ul>
+            <li>To provide the requested service (generate documentation outputs and fetch requested metadata).</li>
+            <li>To protect service integrity and diagnose technical problems.</li>
+            <li>To operate and improve the service using aggregated usage metrics.</li>
+        </ul>
+
+        <h2 class="h5 mt-4">Legal basis (GDPR Article 6)</h2>
+        <ul>
+            <li>Article 6(1)(b): processing necessary to provide the requested service functions.</li>
+            <li>Article 6(1)(f): legitimate interest in security, abuse prevention, and service reliability.</li>
+        </ul>
+
+        <h2 class="h5 mt-4">Storage and retention</h2>
+        <p>
+            Data entered in the main form is not stored permanently as a user profile or permanent record. Temporary session data is used to
+            complete the requested operation and is short-lived. Aggregated counters are retained without direct personal identifiers.
+        </p>
+
+        <h2 class="h5 mt-4">Third-party recipients</h2>
+        <p>
+            URGE connects to external services only when you request that action, including Dataverse and ORCID. These providers process
+            requests under their own privacy policies and terms.
+        </p>
+
+        <h2 class="h5 mt-4">International transfers</h2>
+        <p>
+            Depending on the selected data source or metadata provider, requests may be processed outside the EEA. When this occurs, processing
+            is governed by the recipient service's legal framework and safeguards.
+        </p>
+
+        <h2 class="h5 mt-4">Your rights under GDPR</h2>
+        <ul>
+            <li>Right of access, rectification, erasure, restriction, objection, and (where applicable) data portability.</li>
+            <li>Right to lodge a complaint with your supervisory authority.</li>
+            <li>Right to contact us directly for a privacy request:
+                <a href="mailto:forskningsdata@usn.no?subject=URGE%20Privacy%20Request">forskningsdata@usn.no</a>.</li>
+        </ul>
+
+        <h2 class="h5 mt-4">Security measures</h2>
+        <p>
+            URGE applies transport and browser security controls, minimizes stored data, and avoids logging direct secrets such as API tokens.
+        </p>
+
+        <h2 class="h5 mt-4">Contact</h2>
+        <p>
+            For privacy questions, contact:
+            <a href="mailto:forskningsdata@usn.no">forskningsdata@usn.no</a>
+        </p>
+
+        <p class="text-muted small mt-4 mb-0">
+            Last updated: 2026-04-15
+        </p>
+
+        <p class="mt-4">
+            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to URGE
+            </a>
+        </p>
+    </main>
+</body>
+</html>
