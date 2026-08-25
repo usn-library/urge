@@ -238,7 +238,7 @@ def _dataverse_get(url, **kwargs):
             'Dataverse TLS verification failed, retrying without certificate check: %s',
             err,
         )
-        return requests.get(url, verify=False, **kwargs)
+        return requests.get(url, **kwargs)
 
 
 def preview_url_matches_base(preview_url, base_url):
